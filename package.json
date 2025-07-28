@@ -5,6 +5,7 @@
   "description": "Free Learn - Educational Resource Crawler Monorepo",
   "private": true,
   "scripts": {
+    "setup:crawler": "./scripts/install-crawler.sh",
     "start:crawler": "nx run data-crawler:run",
     "start:crawler:example": "nx run data-crawler:run:example",
     "test": "nx run-many --target=test --all",
