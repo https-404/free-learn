@@ -1,22 +1,32 @@
 # Python requirements for the data crawler
-aiohttp==3.9.3
-beautifulsoup4==4.12.3
-requests==2.31.0
-selenium==4.18.1
-lxml==5.1.0
-pandas==2.2.0
-python-dotenv==1.0.1
-pydantic==2.6.1
-tenacity==8.2.3
-fake-useragent==1.4.0
-pytube==15.0.0
-arxiv==2.1.0
+aiohttp>=3.9.0,<4.0.0
+beautifulsoup4>=4.12.0,<5.0.0
+requests>=2.31.0,<3.0.0
+selenium>=4.18.0,<5.0.0
+lxml>=5.0.0,<6.0.0; platform_system != "Windows"
+lxml-stubs>=0.5.0; platform_system != "Windows"
+lxml_html_clean>=0.4.0  # Required for newspaper3k with newer lxml
+pandas>=2.0.0,<3.0.0
+python-dotenv>=1.0.0,<2.0.0
+pydantic>=2.6.0,<3.0.0
+tenacity>=8.2.0,<9.0.0
+fake-useragent>=1.4.0,<2.0.0
+pytube>=15.0.0,<16.0.0
+arxiv>=2.1.0,<3.0.0
+html5lib>=1.1  # Alternative parser if lxml fails
+pyquery>=2.0.0  # Alternative to lxml
+
+# Additional crawler dependencies
+newspaper3k>=0.2.8,<1.0.0  # For article extraction
+yt-dlp>=2024.1.0  # For YouTube video info extraction
+pdfplumber>=0.11.0  # For PDF content extraction
+keybert>=0.8.0  # For keyword extraction and tagging
 
 # Development dependencies
-black==24.2.0
-flake8==7.0.0
-isort==5.13.2
-mypy==1.8.0
-pytest==8.0.0
-pytest-cov==4.0.0
-pytest-asyncio==0.23.5
+black>=24.0.0,<25.0.0
+flake8>=7.0.0,<8.0.0
+isort>=5.13.0,<6.0.0
+mypy>=1.8.0,<2.0.0
+pytest>=8.0.0,<9.0.0
+pytest-cov>=4.0.0,<5.0.0
+pytest-asyncio>=0.23.0,<1.0.0

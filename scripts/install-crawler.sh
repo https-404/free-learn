@@ -51,6 +51,63 @@ fi
 
 print_info "Python $PYTHON_VERSION detected ✓"
 
+# Check for system dependencies (Ubuntu/Debian)
+check_system_deps() {
+    if command_exists apt-get; then
+        print_info "Detected Debian/Ubuntu system - checking for required system packages..."
+
+        MISSING_PACKAGES=""
+
+        # Check for libxml2-dev
+        if ! dpkg -l | grep -q "libxml2-dev"; then
+            MISSING_PACKAGES="$MISSING_PACKAGES libxml2-dev"
+        fi
+
+        # Check for libxslt1-dev
+        if ! dpkg -l | grep -q "libxslt1-dev"; then
+            MISSING_PACKAGES="$MISSING_PACKAGES libxslt1-dev"
+        fi
+
+        # Check for python3-dev
+        if ! dpkg -l | grep -q "python3-dev"; then
+            MISSING_PACKAGES="$MISSING_PACKAGES python3-dev"
+        fi
+
+        if [ ! -z "$MISSING_PACKAGES" ]; then
+            print_warning "Missing system packages:$MISSING_PACKAGES"
+            print_info "To install them, run:"
+            print_info "sudo apt-get update && sudo apt-get install -y$MISSING_PACKAGES"
+            echo ""
+            read -p "Would you like to continue without these packages? (y/N): " -n 1 -r
+            echo
+            if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                print_info "Please install the system packages and run this script again."
+                exit 1
+            fi
+        else
+            print_success "All required system packages are installed ✓"
+        fi
+    elif command_exists yum; then
+        print_info "Detected Red Hat/CentOS system - checking for required system packages..."
+        print_warning "Make sure you have: libxml2-devel libxslt-devel python3-devel"
+    elif command_exists pacman; then
+        print_info "Detected Arch Linux system - checking for required system packages..."
+        print_warning "Make sure you have: libxml2 libxslt python"
+    elif command_exists brew; then
+        print_info "Detected macOS with Homebrew - checking for required system packages..."
+        if ! brew list libxml2 >/dev/null 2>&1; then
+            print_info "Installing libxml2 via Homebrew..."
+            brew install libxml2
+        fi
+        if ! brew list libxslt >/dev/null 2>&1; then
+            print_info "Installing libxslt via Homebrew..."
+            brew install libxslt
+        fi
+    else
+        print_warning "Unknown package manager. Make sure libxml2 and libxslt development packages are installed."
+    fi
+}
+
 # Get the script directory and project root
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
@@ -66,6 +123,9 @@ if [ ! -f "$PROJECT_ROOT/package.json" ] || [ ! -f "$CRAWLER_DIR/main.py" ]; the
     print_error "This script must be run from the free-learn project root or scripts directory."
     exit 1
 fi
+
+# Check system dependencies
+check_system_deps
 
 # Create virtual environment if it doesn't exist
 if [ ! -d "$VENV_DIR" ]; then
@@ -87,8 +147,26 @@ python -m pip install --upgrade pip
 # Install requirements
 if [ -f "$CRAWLER_DIR/requirements.txt" ]; then
     print_info "Installing Python dependencies..."
-    pip install -r "$CRAWLER_DIR/requirements.txt"
-    print_success "All dependencies installed successfully!"
+
+    # Try to install with retry mechanism for network issues
+    for i in {1..3}; do
+        if pip install -r "$CRAWLER_DIR/requirements.txt"; then
+            print_success "All dependencies installed successfully!"
+            break
+        else
+            if [ $i -eq 3 ]; then
+                print_error "Failed to install dependencies after 3 attempts."
+                print_info "You may need to install system dependencies. See the error messages above."
+                print_info "For Ubuntu/Debian: sudo apt-get install libxml2-dev libxslt1-dev python3-dev"
+                print_info "For CentOS/RHEL: sudo yum install libxml2-devel libxslt-devel python3-devel"
+                print_info "For macOS: brew install libxml2 libxslt"
+                exit 1
+            else
+                print_warning "Installation failed, retrying... (attempt $i/3)"
+                sleep 2
+            fi
+        fi
+    done
 else
     print_error "requirements.txt not found in $CRAWLER_DIR"
     exit 1
@@ -96,14 +174,20 @@ fi
 
 # Verify installation
 print_info "Verifying installation..."
-python -c "import aiohttp, beautifulsoup4, requests, selenium, lxml, pandas" 2>/dev/null
+python -c "import aiohttp, bs4, requests, selenium, pandas" 2>/dev/null
 if [ $? -eq 0 ]; then
-    print_success "All main dependencies are working correctly!"
-else
-    print_warning "Some dependencies may not be properly installed."
-fi
+    print_success "Core dependencies are working correctly!"
 
-# Create .env file if it doesn't exist
+    # Check optional dependencies
+    python -c "import lxml" 2>/dev/null
+    if [ $? -eq 0 ]; then
+        print_success "lxml is working correctly! ✓"
+    else
+        print_warning "lxml is not available - using html5lib as fallback parser"
+    fi
+else
+    print_warning "Some core dependencies may not be properly installed."
+fi# Create .env file if it doesn't exist
 ENV_FILE="$CRAWLER_DIR/.env"
 if [ ! -f "$ENV_FILE" ]; then
     print_info "Creating sample .env file..."
