@@ -2,13 +2,42 @@
   "name": "@free-learn/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "description": "Free Learn - Educational Resource Crawler Monorepo",
   "private": true,
-  "dependencies": {
-    "empty": "0.10.1"
+  "scripts": {
+    "start:crawler": "nx run data-crawler:run",
+    "start:crawler:example": "nx run data-crawler:run:example",
+    "test": "nx run-many --target=test --all",
+    "lint": "nx run-many --target=lint --all",
+    "format": "nx run-many --target=format --all && prettier --write \"**/*.{json,yaml,yml,md}\"",
+    "type-check": "nx run-many --target=type-check --all",
+    "build": "nx run-many --target=build --all",
+    "affected:test": "nx affected --target=test",
+    "affected:lint": "nx affected --target=lint",
+    "affected:build": "nx affected --target=build",
+    "nx:reset": "nx reset",
+    "prepare": "husky install || true"
   },
+  "dependencies": {},
   "devDependencies": {
     "@nx/workspace": "21.3.7",
-    "nx": "21.3.7"
+    "nx": "21.3.7",
+    "prettier": "^3.2.5",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2"
+  },
+  "lint-staged": {
+    "*.{json,yaml,yml,md}": [
+      "prettier --write"
+    ],
+    "*.py": [
+      "black",
+      "isort",
+      "flake8"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
   }
 }

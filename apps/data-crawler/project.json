@@ -1,0 +1,49 @@
+{
+  "name": "data-crawler",
+  "projectType": "application",
+  "sourceRoot": "apps/data-crawler/src",
+  "targets": {
+    "run": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "python main.py",
+        "cwd": "apps/data-crawler"
+      },
+      "configurations": {
+        "example": {
+          "command": "python main.py \"computer science\" --limit 10",
+          "cwd": "apps/data-crawler"
+        }
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "flake8 .",
+        "cwd": "apps/data-crawler"
+      }
+    },
+    "format": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "black . && isort .",
+        "cwd": "apps/data-crawler"
+      }
+    },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "mypy .",
+        "cwd": "apps/data-crawler"
+      }
+    },
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pip install -r requirements.txt",
+        "cwd": "apps/data-crawler"
+      }
+    }
+  },
+  "tags": ["type:app", "scope:crawler"]
+}
