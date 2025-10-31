@@ -1,0 +1,102 @@
+[
+  {
+    "content_link": "https://www.coursera.org/specializations/packt-become-a-c-plus-plus-ultimate-developer-guide",
+    "website_name": "www.coursera.org",
+    "title": "Become a C++ Pro: The Ultimate Developer Guide | Coursera",
+    "description": "Offered by Packt. Master C++ Development with Real-World Projects. Master C++ fundamentals, object-oriented programming, and real-world ... Enroll for free.",
+    "content": "Master C++ Development with Real-World Projects. Master C++ fundamentals, object-oriented programming, and real-world projects. Instructor: Packt - Course Instructors  Included with  Learn more Recommended experience Intermediate level This specialization is ideal for those looking to master C++. No prior experience required, familiarity with basic computer operations is helpful. Recommended experience Intermediate level This specialization is ideal for those looking to master C++. No prior experience required, familiarity with basic computer operations is helpful. Understand and apply C++ fundamentals like variables, operators, and control flow. Work with arrays, vectors, and functions to organize and manage code. Master object-oriented programming concepts like classes, inheritance, and polymorphism. Implement advanced C++ features like templates, STL, and custom data structures. Add to your LinkedIn profile October 2025 This specialization features Coursera Coach! A smarter way to learn with interactive, real-time conversations that help you test your knowledge, challenge assumptions, and deepen your understanding as you progress through the specialization. You’ll begin by setting up your development environment and learning core C++ principles like variables, data types, and operators, laying a strong foundation for more advanced topics. Projects such as a tip calculator and secret agent ID generator will reinforce your learning. As you progress, you’ll explore control statements, arrays, vectors, functions, and object-oriented programming. These concepts will improve your problem-solving skills, with projects like a rock-paper-scissors game and leap year checker. The specialization then covers advanced topics like inheritance, polymorphism, exception handling, debugging, and memory management with pointers. You’ll learn to handle errors, optimize memory, and make your programs more robust. The final sections focus on templates, STL, and data structures, prepari",
+    "content_type": "course",
+    "tags": [
+      "programming",
+      "programming concepts",
+      "code master",
+      "master development",
+      "oriented programming"
+    ],
+    "field_related_to": "cpp programming",
+    "timestamp": "2025-10-31T18:44:48.788043",
+    "hash": "57fd1c5417766503fd3141ca8771c057b2131da7b0b89609db3600bdde3a0fe3",
+    "free_access": false,
+    "rating_score": 0.0
+  },
+  {
+    "content_link": "https://www.coursera.org/specializations/packt-arduino-programming-and-project-management",
+    "website_name": "www.coursera.org",
+    "title": "Arduino Programming and Project Development | Coursera",
+    "description": "Offered by Packt. Master Arduino Programming with Hands-On Projects. Learn to design Arduino projects, develop modular code, & integrate ... Enroll for free.",
+    "content": "Master Arduino Programming with Hands-On Projects. Learn to design Arduino projects, develop modular code, & integrate sensors and communication tech. Instructor: Packt - Course Instructors  Included with  Learn more Recommended experience Intermediate level Ideal for learners with basic programming knowledge. No prior Arduino experience needed, but familiarity with electronics is helpful. Recommended experience Intermediate level Ideal for learners with basic programming knowledge. No prior Arduino experience needed, but familiarity with electronics is helpful. Master the basics of Arduino, including circuit design and programming techniques. Develop real-world projects, such as remote-controlled cars and ultrasonic sensor alarms. Learn Object-Oriented Programming (OOP) principles and apply them to Arduino projects. Gain experience in advanced Arduino topics like Bluetooth communication and infrared signal processing. Add to your LinkedIn profile September 2025 This specialization features Coursera Coach! A smarter way to learn with interactive, real-time conversations that help you test your knowledge, challenge assumptions, and deepen your understanding as you progress through the specialization. In this hands-on specialization, you’ll explore the fundamentals of Arduino programming and project development. You'll begin with setting up your development environment and simulating projects in Tinkercad. You will gradually work through simple tasks like controlling LEDs and progress to using sensors, displays, and remote controllers, building a solid foundation in both circuit design and programming. The specialization will also guide you through Object-Oriented Programming (OOP) with Arduino, where you will learn to write modular, reusable code. As you advance, you’ll work on projects like infrared communication and ultrasonic sensors, while gaining confidence with development environments and real-world applications. This specialization is ideal for learners with ",
+    "content_type": "course",
+    "tags": [
+      "arduino projects",
+      "programming",
+      "arduino programming",
+      "programming oop",
+      "programming knowledge"
+    ],
+    "field_related_to": "cpp programming",
+    "timestamp": "2025-10-31T18:44:50.917153",
+    "hash": "b50df408baa5d3fa5142fed2c0aa2ea27f9090d7eae49753385d046caf80a4fc",
+    "free_access": false,
+    "rating_score": 0.0
+  },
+  {
+    "content_link": "https://www.coursera.org/specializations/hands-on-cpp",
+    "website_name": "www.coursera.org",
+    "title": "Programming in C++: A Hands-on Introduction Specialization [4 courses] (Codio) | Coursera",
+    "description": "Offered by Codio. Hands-on Introduction to C++ Programming. Code and run your first C++ program in minutes without installing anything! Enroll for free.",
+    "content": "Hands-on Introduction to C++ Programming. Code and run your first C++ program in minutes without installing anything! Instructors: Elise Deitrick +2 more 41,123 already enrolled Included with  Learn more (1,127 reviews) Recommended experience Beginner level No programming experience (1,127 reviews) Recommended experience Beginner level No programming experience Automate everyday, repetitive tasks using C++ programs Create engaging, graphical based programs Develop a firm foundation of Computer Science concepts you can bring to any language you learn Add to your LinkedIn profile This specialization is intended for people without programming experience who seek to develop C++ programming skills and learn about the underlying computer science concepts that will allow them to pick up other programming languages quickly. In these four courses, you will cover everything from fundamentals to object-oriented design. These topics will help prepare you to write anything from small programs to automate repetitive tasks to larger applications, giving you enough understanding of C++ to tackle more specialized topics such as Data Science and Artificial Intelligence. Applied Learning Project Learners will create a variety of practical projects including helpful C++ programs that can speed up everyday tasks such as an automated file updater. Later projects will create graphical output using the Clmg library, and even including animations. Use variables and operators to store and manipulate small pieces of data Automate decision making using selection statements so the program result differs based on data Repeat sections of your program using the appropriate loop type Store and manipulate vectors of data Compare and manipulate strings of text Read and write to text and CSV files Define and use custom functions to improve code readability When and how to use recursion instead of iteration Create and modify custom objects How to architect larger programs using object-oriented principl",
+    "content_type": "course",
+    "tags": [
+      "programming experience",
+      "programming skills",
+      "introduction programming",
+      "programming",
+      "develop programming"
+    ],
+    "field_related_to": "cpp programming",
+    "timestamp": "2025-10-31T18:44:52.906048",
+    "hash": "86bf16a6bb57c3deb5dacfc548225d07d879761c56a09d8130965ce914ac8854",
+    "free_access": false,
+    "rating_score": 0.0
+  },
+  {
+    "content_link": "https://www.coursera.org/specializations/coding-for-everyone",
+    "website_name": "www.coursera.org",
+    "title": "Coding for Everyone: C and C++ | Coursera",
+    "description": "Offered by University of California, Santa Cruz. Beginner to Programmer — Learn to Code in C & C++. Gain a deep understanding of computer ... Enroll for free.",
+    "content": "Beginner to Programmer — Learn to Code in C & C++. Gain a deep understanding of computer programming by learning to code, debug, and solve complex problems with C and C++. Instructor: Ira Pohl  Included with  Learn more (3,140 reviews) Recommended experience Beginner level Familiarity with any other programming language; some graph theory. (3,140 reviews) Recommended experience Beginner level Familiarity with any other programming language; some graph theory. Write and debug code in C and C++ programming languages Understand algorithms, and how to properly express them Add to your LinkedIn profile This Specialization is intended for all programming enthusiasts, as well as beginners, computer and other scientists, and artificial intelligence enthusiasts seeking to develop their programming skills in the foundational languages of C and C++. Through the four courses — two in C, and two in C++ — you will cover the basics of programming in C and move on to the more advanced C++ semantics and syntax, which will prepare you to apply these skills to a number of higher-level problems using AI algorithms and Monte Carlo evaluation in complex games. Applied Learning Project Learners in this specialization will start coding right from the start. Every module presents ample opportunities for writing programs and finding errors in the learner's own and others' code. Building on their knowledge, learners will demonstrate their understanding of coding in a practice-intensive final assessment. Write a simple program. Compile, debug, and run a program. Apply concepts related to arrays & pointers, functions & storage classes, logic operators & various question types, lexical elements & data types. Apply concepts using command line arguments. Use simple C++ constructs. Use assets to debug code. Convert C programs to C++. Use basic container classes. Apply the principles of Dijkstra's shortest path algorithm. Use the Standard Template Library. Apply inheritance logic and C++ syntax. Des",
+    "content_type": "course",
+    "tags": [
+      "computer programming",
+      "programming learning",
+      "basics programming",
+      "programming skills",
+      "programming advanced"
+    ],
+    "field_related_to": "cpp programming",
+    "timestamp": "2025-10-31T18:44:55.200201",
+    "hash": "baba990dec7103cad32034ba1397a2eb66de5b84ae9c6aaeabca0a476e1379ea",
+    "free_access": false,
+    "rating_score": 0.0
+  },
+  {
+    "content_link": "https://www.coursera.org/specializations/object-oriented-programming-s12n",
+    "website_name": "www.coursera.org",
+    "title": "Object Oriented Programming Specialization [5 courses] (UoL) | Coursera",
+    "description": "Build a Crypto-Trading Platform with C++. Develop Object Oriented programming and data handling skills in C++ through an exciting worked example Enroll for free.",
+    "content": "Build a Crypto-Trading Platform with C++. Develop Object Oriented programming and data handling skills in C++ through an exciting worked example Instructor: Dr Matthew Yee-King  10,204 already enrolled Included with  Learn more (172 reviews) (172 reviews) In this 5-course specialisation, you will develop various C++ programming skills. Rather than building many small programs as you will in other courses, we have taken a different approach: you will create a single, extensive program through the five courses. The program will be a simplified cryptocurrency exchange platform. We will cover the following learning objectives: Use control flow to build interactive, multi-branched, iterated programs Select appropriate data types to model the trading platform's information Convert algorithms from pseudo-code to C++ and test them Use classes to combine data and functions and to model interactions between different parts of a program Understand how to construct an extensive program from multiple modules The content for this specialisation is taken from the University of London's online BSc Computer Science degree. If you complete the courses and eventually take the course 'Object Oriented Programming' in the degree, you progress should be carried across.  Applied Learning Project In this specialisation, you will build a single, large project: a cryptocurrency trading platform. You will build the program using C++ during five courses. The program runs in the command-line in text mode and it simulates the experience of buying and selling cryptocurrencies. The program works with a real data set representing the order book of a real currency exchange platform.  Add to your LinkedIn profile In this 5-course specialisation, you will develop various C++ programming skills. Rather than building many small programs as you will in other courses, we have taken a different approach: you will create a single, extensive program through the five courses. The program will be a simplified c",
+    "content_type": "course",
+    "tags": [
+      "cryptocurrencies program",
+      "crypto trading",
+      "various programming",
+      "programming",
+      "project cryptocurrency"
+    ],
+    "field_related_to": "cpp programming",
+    "timestamp": "2025-10-31T18:44:57.259669",
+    "hash": "68cf0ece2cb0c61b164b9d48c484c0ce7e741cf48c1b99c14a73b849ecf57da5",
+    "free_access": false,
+    "rating_score": 0.0
+  }
+]

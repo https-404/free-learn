@@ -23,11 +23,36 @@ class MitOcwConnector:
                     if response.status == 200:
                         html = await response.text()
                         soup = BeautifulSoup(html, 'html.parser')
-                        for rank, result in enumerate(soup.select('a.course-link')[:self.limit], 1):
-                            link = result['href']
+                        # MIT OCW may load content via JavaScript, try regex extraction
+                        import re
+                        # Look for course links in various formats
+                        course_links = re.findall(r'/courses/[^"\'<>\s)]+', html)
+                        # Also try BeautifulSoup for any links
+                        soup_links = soup.find_all('a', href=re.compile(r'/courses/'))
+                        for link in soup_links:
+                            href = link.get('href', '')
+                            if '/courses/' in href:
+                                course_links.append(href)
+
+                        # Remove duplicates and normalize
+                        unique_links = []
+                        seen = set()
+                        for link in course_links:
+                            # Normalize link
                             if not link.startswith('http'):
                                 link = 'https://ocw.mit.edu' + link
+                            if link not in seen and '/courses/' in link:
+                                unique_links.append(link)
+                                seen.add(link)
+
+                        count = 0
+                        for rank, link in enumerate(unique_links[:self.limit], 1):
                             await queue.put((link, rank))
+                            count += 1
+                        if count == 0:
+                            logger.warning(f"MIT OCW search found no results for query: {self.topic} (content may be loaded via JavaScript)")
+                        else:
+                            logger.info(f"MIT OCW search found {count} results")
                     else:
                         logger.warning(f"MIT OCW search failed: Status {response.status}")
         except Exception as e:

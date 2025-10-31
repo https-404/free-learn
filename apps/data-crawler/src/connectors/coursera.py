@@ -23,11 +23,20 @@ class CourseraConnector:
                     if response.status == 200:
                         html = await response.text()
                         soup = BeautifulSoup(html, 'html.parser')
-                        for rank, result in enumerate(soup.select('a[data-click-key="search.search.click.search_card"]')[:self.limit], 1):
-                            link = result['href']
-                            if not link.startswith('http'):
-                                link = 'https://www.coursera.org' + link
-                            await queue.put((link, rank))
+                        # Try multiple selectors for Coursera
+                        results = soup.select('a[data-click-key="search.search.click.search_card"]') or soup.select('a[href*="/learn/"]') or soup.select('div.card a[href*="/learn/"]')
+                        count = 0
+                        for rank, result in enumerate(results[:self.limit], 1):
+                            link = result.get('href', '')
+                            if link and '/learn/' in link:
+                                if not link.startswith('http'):
+                                    link = 'https://www.coursera.org' + link
+                                await queue.put((link, rank))
+                                count += 1
+                        if count == 0:
+                            logger.warning(f"Coursera search found no results for query: {self.topic}")
+                        else:
+                            logger.info(f"Coursera search found {count} results")
                     else:
                         logger.warning(f"Coursera search failed: Status {response.status}")
         except Exception as e:

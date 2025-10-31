@@ -23,11 +23,29 @@ class KhanAcademyConnector:
                     if response.status == 200:
                         html = await response.text()
                         soup = BeautifulSoup(html, 'html.parser')
-                        for rank, result in enumerate(soup.select('a[data-test-id="lesson-card-link"]')[:self.limit], 1):
-                            link = result['href']
+                        # Khan Academy loads content via JavaScript, try to extract from any available links
+                        import re
+                        # Look for Khan Academy links in the HTML
+                        ka_links = re.findall(r'"(/computing/[^"]+)"|"(/programming/[^"]+)"|"(/a/[^"]+)"', html)
+                        flat_links = [link for group in ka_links for link in group if link]
+                        # Also try BeautifulSoup
+                        all_links = soup.find_all('a', href=True)
+                        for link in all_links:
+                            href = link.get('href', '')
+                            if href and ('computing' in href or 'programming' in href or '/a/' in href):
+                                flat_links.append(href)
+
+                        unique_links = list(dict.fromkeys(flat_links))  # Remove duplicates
+                        count = 0
+                        for rank, link in enumerate(unique_links[:self.limit], 1):
                             if not link.startswith('http'):
                                 link = 'https://www.khanacademy.org' + link
                             await queue.put((link, rank))
+                            count += 1
+                        if count == 0:
+                            logger.warning(f"Khan Academy search found no results for query: {self.topic} (content may be loaded via JavaScript)")
+                        else:
+                            logger.info(f"Khan Academy search found {count} results")
                     else:
                         logger.warning(f"Khan Academy search failed: Status {response.status}")
         except Exception as e:

@@ -23,11 +23,20 @@ class HarvardOnlineConnector:
                     if response.status == 200:
                         html = await response.text()
                         soup = BeautifulSoup(html, 'html.parser')
-                        for rank, result in enumerate(soup.select('a.course-card')[:self.limit], 1):
-                            link = result['href']
-                            if not link.startswith('http'):
-                                link = 'https://www.harvardonline.harvard.edu' + link
-                            await queue.put((link, rank))
+                        # Try multiple selectors for Harvard Online
+                        results = soup.select('a.course-card') or soup.select('a[href*="/course/"]') or soup.select('div.card a')
+                        count = 0
+                        for rank, result in enumerate(results[:self.limit], 1):
+                            link = result.get('href', '')
+                            if link:
+                                if not link.startswith('http'):
+                                    link = 'https://www.harvardonline.harvard.edu' + link
+                                await queue.put((link, rank))
+                                count += 1
+                        if count == 0:
+                            logger.warning(f"Harvard Online search found no results for query: {self.topic}")
+                        else:
+                            logger.info(f"Harvard Online search found {count} results")
                     else:
                         logger.warning(f"Harvard Online search failed: Status {response.status}")
         except Exception as e:

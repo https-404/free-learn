@@ -10,7 +10,10 @@ class ArxivConnector:
     def __init__(self, topic: str, limit: int):
         self.topic = topic
         self.limit = limit
-        self.search_url = f"https://arxiv.org/search/?query={topic}&searchtype=all"
+        # Search for tutorials and educational materials, not research papers
+        # Arxiv may not be the best source for learning materials, but we'll try to find tutorials
+        educational_query = f"{topic} tutorial OR course OR guide OR introduction"
+        self.search_url = f"https://arxiv.org/search/?query={educational_query}&searchtype=all"
 
     async def search(self, queue):
         try:

@@ -75,8 +75,13 @@ class ResourceScraper:
             domain = urlparse(url).netloc
             content_type = self.detect_content_type(url)
             html = await self.fetch_page(url)
-            is_free = await self.detect_free_access(url, html, content_type)
-            rating_score = await self.compute_rating_score(url, html, content_type, search_rank)
+
+            # Filter out research papers that aren't learning materials
+            if self._is_research_paper_only(url, html, content_type):
+                return None
+
+            is_free = self.detect_free_access(url, html, content_type)
+            rating_score = self.compute_rating_score(url, html, content_type, search_rank)
 
             item = {
                 'content_link': url,
@@ -196,6 +201,48 @@ class ResourceScraper:
         except Exception as e:
             logger.warning(f"Error detecting free access for {url}: {e}")
             return False
+
+    def _is_research_paper_only(self, url: str, html: Optional[str], content_type: str) -> bool:
+        """Filter out research papers that aren't educational/tutorial content"""
+        # arXiv is primarily for research papers, not learning materials
+        # Only include if it explicitly mentions tutorial/educational keywords in URL or content
+        if 'arxiv.org' in url:
+            # Check URL first - if it doesn't have tutorial/course keywords, filter it out
+            url_lower = url.lower()
+            has_educational_keywords = any(kw in url_lower for kw in ['tutorial', 'course', 'guide', 'intro'])
+
+            if not has_educational_keywords:
+                # Check content if available
+                if html:
+                    from bs4 import BeautifulSoup
+                    soup = BeautifulSoup(html, 'html.parser')
+                    text_lower = soup.get_text().lower()
+                    # Must have strong tutorial indicators, not just research paper structure
+                    tutorial_indicators = ['tutorial', 'learn how to', 'course', 'lesson', 'guide', 'getting started', 'introduction to']
+                    has_tutorial_content = any(indicator in text_lower for indicator in tutorial_indicators)
+
+                    # If no clear tutorial indicators, filter out
+                    if not has_tutorial_content:
+                        return True
+                else:
+                    # No content available and URL doesn't suggest tutorial - filter out
+                    return True
+
+        # Check for other research paper patterns
+        research_domains = ['doi.org', 'ieee.org', 'acm.org', 'springer.com', 'nature.com']
+        research_keywords = ['journal', 'conference', 'proceedings', 'paper', 'research article']
+
+        if any(domain in url for domain in research_domains):
+            return True
+
+        if html:
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(html, 'html.parser')
+            text_lower = soup.get_text().lower()
+            if any(keyword in text_lower for keyword in research_keywords) and 'tutorial' not in text_lower and 'course' not in text_lower:
+                return True
+
+        return False
 
     def compute_rating_score(self, url: str, html: Optional[str], content_type: str, search_rank: Optional[int]) -> float:
         try:

@@ -24,10 +24,11 @@ class ResourceCrawler:
         self.deduplicator = Deduplicator(topic, CONFIG['output_dir'])
         self.storage = ResourceStorage(topic, CONFIG['output_dir'])
         self.scraper = ResourceScraper(topic, limit, self.deduplicator)
+        # Exclude arXiv as it primarily returns research papers, not learning materials
         self.connectors = [
             GoogleConnector(topic, limit),
             YouTubeConnector(topic, limit),
-            ArxivConnector(topic, limit),
+            # ArxivConnector(topic, limit),  # Disabled - primarily research papers, not tutorials
             UdemyConnector(topic, limit),
             CourseraConnector(topic, limit),
             EdxConnector(topic, limit),
@@ -40,7 +41,7 @@ class ResourceCrawler:
     async def run(self):
         tasks = [connector.search(self.queue) for connector in self.connectors]
         await asyncio.gather(*tasks)
-        
+
         collected_items = []
         while not self.queue.empty() and len(collected_items) < self.limit:
             item = await self.queue.get()
@@ -49,7 +50,7 @@ class ResourceCrawler:
             if resource and not self.deduplicator.is_duplicate(resource):
                 self.deduplicator.add_hash(resource)
                 collected_items.append(resource)
-        
+
         if collected_items:
             self.storage.save_resources(collected_items)
         logger.info(f"Crawling complete. Collected {len(collected_items)} items.")

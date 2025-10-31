@@ -1,112 +1,23 @@
 {
-  // Python Configuration
-  "python.defaultInterpreterPath": "./venv/bin/python",
-  "python.linting.enabled": true,
-  "python.linting.flake8Enabled": true,
-  "python.linting.pylintEnabled": false,
-  "python.linting.mypyEnabled": true,
-  "python.linting.lintOnSave": true,
-  "python.formatting.provider": "black",
-  "python.formatting.blackArgs": ["--line-length=88"],
-  "python.sortImports.args": ["--profile", "black"],
-  "python.analysis.typeCheckingMode": "basic",
-  "python.analysis.autoImportCompletions": true,
-
-  // Editor Configuration
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
-    "source.fixAll.eslint": "never"
-  },
-  "editor.rulers": [88],
-  "editor.tabSize": 4,
-  "editor.insertSpaces": true,
-  "editor.trimAutoWhitespace": true,
-  "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true,
-
-  // File Associations
-  "files.associations": {
-    "*.json": "jsonc",
-    "*.yaml": "yaml",
-    "*.yml": "yaml",
-    "project.json": "jsonc",
-    "nx.json": "jsonc",
-    "workspace.json": "jsonc"
-  },
-
-  // Language Specific Settings
-  "[python]": {
-    "editor.tabSize": 4,
-    "editor.insertSpaces": true,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "ms-python.python",
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
-    }
-  },
-  "[json]": {
-    "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[yaml]": {
-    "editor.tabSize": 2,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.wordWrap": "on",
-    "editor.quickSuggestions": {
-      "other": false,
-      "comments": false,
-      "strings": false
-    }
-  },
-
-  // Search and Explorer
   "search.exclude": {
-    "**/node_modules": true,
-    "**/venv": true,
-    "**/.venv": true,
-    "**/env": true,
-    "**/.env": true,
-    "**/__pycache__": true,
-    "**/*.pyc": true,
-    "**/dist": true,
-    "**/build": true,
-    "**/.nx": true,
-    "**/.pytest_cache": true,
-    "**/.mypy_cache": true
+    "**/.sst": true
   },
-  "files.exclude": {
-    "**/__pycache__": true,
-    "**/*.pyc": true,
-    "**/.DS_Store": true
-  },
-
-  // Nx Integration
-  "nxConsole.showNodeVersionOnStartup": false,
-  "nxConsole.enableTelemetry": false,
-
-  // Terminal
-  "terminal.integrated.defaultProfile.linux": "zsh",
-  "terminal.integrated.cwd": "${workspaceFolder}",
-
-  // Extensions Recommendations
-  "extensions.recommendations": [
-    "ms-python.python",
-    "ms-python.black-formatter",
-    "ms-python.isort",
-    "ms-python.flake8",
-    "ms-python.mypy-type-checker",
-    "esbenp.prettier-vscode",
-    "nrwl.angular-console",
-    "redhat.vscode-yaml",
-    "ms-vscode.vscode-json"
-  ]
+  "task.allowAutomaticTasks": true,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "debug.openDebug": "neverOpen",
+  "problems.autoReveal": true,
+  "terminal.integrated.hideOnStartup": "always",
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "terminal.integrated.inheritEnv": false,
+  "jestrunner.configPath": "jest.unit.config.cjs",
+  "compile-hero.disable-compile-files-on-did-save-code": true,
+  "tasks": {
+    "label": "lint on open",
+    "type": "shell",
+    "command": "npm run lint",
+    "runOn": "folderOpen"
+  }
 }
